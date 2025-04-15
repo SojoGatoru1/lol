@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZ Coaching Center Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div id="app">
+        <!-- Home Screen -->
+        <div id="home-screen" class="screen">
+            <div class="logo-container">
+                <i class="fas fa-graduation-cap logo-icon"></i>
+                <h1>AZ Coaching Center</h1>
+            </div>
+            <div class="button-container">
+                <button class="role-btn admin-btn" onclick="showLogin('Admin')">
+                    <i class="fas fa-user-shield"></i> Admin
+                </button>
+                <button class="role-btn teacher-btn" onclick="showLogin('Teacher')">
+                    <i class="fas fa-chalkboard-teacher"></i> Teacher
+                </button>
+                <button class="role-btn student-btn" onclick="showLogin('Student')">
+                    <i class="fas fa-user-graduate"></i> Student
+                </button>
+                <button class="role-btn exit-btn" onclick="exitApp()">
+                    <i class="fas fa-sign-out-alt"></i> Exit
+                </button>
+            </div>
+        </div>
+
+        <!-- Login Screen -->
+        <div id="login-screen" class="screen hidden">
+            <div class="form-container">
+                <h2 id="login-title"><i class="fas fa-sign-in-alt"></i> Login</h2>
+                <div class="input-group">
+                    <i class="fas fa-user input-icon"></i>
+                    <input type="text" id="username" placeholder="Enter username">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" id="password" placeholder="Enter password">
+                </div>
+                <div class="button-group">
+                    <button class="primary-btn" onclick="handleLogin()">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                    <button class="secondary-btn" onclick="showHome()">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                    <button class="tertiary-btn" onclick="showSignup()">
+                        <i class="fas fa-user-plus"></i> Sign Up
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Signup Screen -->
+        <div id="signup-screen" class="screen hidden">
+            <div class="form-container">
+                <h2><i class="fas fa-user-plus"></i> Sign Up</h2>
+                <div class="input-group">
+                    <i class="fas fa-id-card input-icon"></i>
+                    <input type="text" id="full-name" placeholder="Enter full name">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-user input-icon"></i>
+                    <input type="text" id="signup-username" placeholder="Enter username">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" id="signup-password" placeholder="Enter password">
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" id="confirm-password" placeholder="Confirm password">
+                </div>
+               
+                <div id="student-fields" class="hidden additional-fields">
+                    <div class="input-group">
+                        <i class="fas fa-user-friends input-icon"></i>
+                        <input type="text" id="guardian-name" placeholder="Enter guardian name">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-phone input-icon"></i>
+                        <input type="text" id="contact-number" placeholder="Enter contact number">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-home input-icon"></i>
+                        <input type="text" id="address" placeholder="Enter address">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-graduation-cap input-icon"></i>
+                        <select id="class" class="form-select">
+                            <option value="">Select Class</option>
+                            <option value="1">Class 1</option>
+                            <option value="2">Class 2</option>
+                            <option value="3">Class 3</option>
+                            <option value="4">Class 4</option>
+                            <option value="5">Class 5</option>
+                            <option value="6">Class 6</option>
+                            <option value="7">Class 7</option>
+                            <option value="8">Class 8</option>
+                            <option value="9">Class 9</option>
+                            <option value="10">Class 10</option>
+                            <option value="11">Class 11-12</option>
+                        </select>
+                    </div>
+                </div>
+               
+                <div id="teacher-fields" class="hidden additional-fields">
+                    <div class="input-group">
+                        <i class="fas fa-graduation-cap input-icon"></i>
+                        <select id="teacher-class" class="form-select">
+                            <option value="">Select Class</option>
+                            <option value="1">Class 1</option>
+                            <option value="2">Class 2</option>
+                            <option value="3">Class 3</option>
+                            <option value="4">Class 4</option>
+                            <option value="5">Class 5</option>
+                            <option value="6">Class 6</option>
+                            <option value="7">Class 7</option>
+                            <option value="8">Class 8</option>
+                            <option value="9">Class 9</option>
+                            <option value="10">Class 10</option>
+                            <option value="11">Class 11-12</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-book input-icon"></i>
+                        <input type="text" id="subject" placeholder="Enter subject">
+                    </div>
+                    <div class="input-group">
+                        <i class="fas fa-phone input-icon"></i>
+                        <input type="text" id="teacher-contact" placeholder="Enter contact number">
+                    </div>
+                </div>
+               
+                <div id="admin-fields" class="hidden additional-fields">
+                    <div class="input-group">
+                        <i class="fas fa-phone input-icon"></i>
+                        <input type="text" id="admin-contact" placeholder="Enter contact number (optional)">
+                    </div>
+                </div>
+               
+                <div class="button-group">
+                    <button class="primary-btn" onclick="saveSignup()">
+                        <i class="fas fa-save"></i> Sign Up
+                    </button>
+                    <button class="secondary-btn" onclick="showHome()">
+                        <i class="fas fa-arrow-left"></i> Back
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Screen -->
+        <div id="dashboard-screen" class="screen hidden">
+            <div class="dashboard-header">
+                <h2 id="dashboard-title"><i class="fas fa-tachometer-alt"></i> Dashboard</h2>
+                <div class="user-info">
+                    <span id="welcome-message"></span>
+                    <button class="logout-btn" onclick="showHome()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                    <button class="secondary-btn" onclick="openModal('change-password-modal')">
+                        <i class="fas fa-key"></i> Change Password
+                    </button>
+                </div>
+            </div>
+           
+            <div class="dashboard-content">
+                <div id="admin-dashboard" class="hidden">
+                    <div class="modal-container" id="admin-modal-container"></div>
+                    <div class="card-container">
+                        <div class="dashboard-card" onclick="openModal('assign-students-modal')">
+                            <i class="fas fa-users"></i>
+                            <h3>Assign Students</h3>
+                            <p>Assign students to teachers</p>
+                        </div>
+                        <div class="dashboard-card" onclick="openModal('manage-teachers-modal')">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            <h3>Manage Teachers</h3>
+                            <p>View and manage all teachers</p>
+                        </div>
+                        <div class="dashboard-card" onclick="openModal('manage-students-modal')">
+                            <i class="fas fa-user-graduate"></i>
+                            <h3>Manage Students</h3>
+                            <p>View and manage all students</p>
+                        </div>
+                        <div class="dashboard-card" onclick="openModal('update-routine-modal')">
+                            <i class="fas fa-calendar-alt"></i>
+                            <h3>Update Routine</h3>
+                            <p>Update class schedule</p>
+                        </div>
+                        <div class="dashboard-card" onclick="openModal('post-notice-modal')">
+                            <i class="fas fa-bullhorn"></i>
+                            <h3>Post Notice</h3>
+                            <p>Create new notices</p>
+                        </div>
+                        <div class="dashboard-card" onclick="openModal('manage-gallery-modal')">
+                            <i class="fas fa-images"></i>
+                            <h3>Manage Gallery</h3>
+                            <p>Upload and manage photos</p>
+                        </div>
+                        <div class="dashboard-card" onclick="openModal('pending-approvals-modal')">
+                            <i class="fas fa-user-check"></i>
+                            <h3>Pending Approvals</h3>
+                            <p>Approve new accounts</p>
+                        </div>
+                    </div>
+                </div>
+               
+                <div id="teacher-dashboard" class="hidden">
+                    <div class="modal-container" id="teacher-modal-container"></div>
+                    <div class="card-container">
+                        <div class="dashboard-card" onclick="openModal('view-subjects-modal')">
+                            <i class="fas fa-book"></i>
+                            <h3>My Subjects</h3>
+                            <p>View assigned subjects</p>
+                        </div>
+                        <div class="dashboard-card" onclick="openModal('update-results-modal')">
+                            <i class="fas fa-poll"></i>
+                            <h3>Update Results</h3>
+                            <p>Update student results</p>
+                        </div>
+                        <div class="dashboard-card" onclick="openModal('post-notice-modal')">
+                            <i class="fas fa-bullhorn"></i>
+                            <h3>Post Notice</h3>
+                            <p>Create new notices</p>
+                        </div>
+                        <div class="dashboard-card" onclick="openModal('view-students-modal')">
+                            <i class="fas fa-users"></i>
+                            <h3>My Students</h3>
+                            <p>View assigned students</p>
+                        </div>
+                        <div class="dashboard-card" onclick="openModal('view-gallery-modal')">
+                            <i class="fas fa-images"></i>
+                            <h3>View Gallery</h3>
+                            <p>View uploaded photos</p>
+                        </div>
+                    </div>
+                </div>
+               
+                <div id="student-dashboard" class="hidden">
+                    <div class="modal-container" id="student-modal-container"></div>
+                    <div class="card-container student-options">
+                        <div class="dashboard-card" onclick="openModal('view-results-modal')">
+                            <i class="fas fa-poll"></i>
+                            <h3>My Results</h3>
+                            <p>View your results</p>
+                        </div>
+                        <div class="dashboard-card" onclick="openModal('view-schedule-modal')">
+                            <i class="fas fa-calendar-alt"></i>
+                            <h3>Class Schedule</h3>
+                            <p>View your routine</p>
+                        </div>
+                        <div class="dashboard-card" onclick="openModal('view-notices-modal')">
+                            <i class="fas fa-bullhorn"></i>
+                            <h3>Notices</h3>
+                            <p>View all notices</p>
+                        </div>
+                        <div class="dashboard-card" onclick="openModal('view-gallery-modal')">
+                            <i class="fas fa-images"></i>
+                            <h3>Gallery</h3>
+                            <p>View uploaded photos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <script src="script.js"></script>
+</body>
+</html>
